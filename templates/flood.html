@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Prediction System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3><i class="fas fa-water"></i> Flood Prediction System</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="floodForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="monsoon_intensity">Monsoon Intensity:</label>
+                                <input type="number" step="any" class="form-control" id="monsoon_intensity" name="monsoon_intensity" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="population_score">Population Score:</label>
+                                <input type="number" step="any" class="form-control" id="population_score" name="population_score" placeholder="Enter value" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="river_management">River Management:</label>
+                                <input type="number" step="any" class="form-control" id="river_management" name="river_management" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="deforestation">Deforestation:</label>
+                                <input type="number" step="any" class="form-control" id="deforestation" name="deforestation" placeholder="Enter value" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="urbanization">Urbanization:</label>
+                                <input type="number" step="any" class="form-control" id="urbanization" name="urbanization" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="climate_change">Climate Change:</label>
+                                <input type="number" step="any" class="form-control" id="climate_change" name="climate_change" placeholder="Enter value" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="dams_quality">Dams Quality:</label>
+                                <input type="number" step="any" class="form-control" id="dams_quality" name="dams_quality" placeholder="Enter value" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="drainage_systems">Drainage Systems:</label>
+                                <input type="number" step="any" class="form-control" id="drainage_systems" name="drainage_systems" placeholder="Enter value" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="agricultural_practices">Agricultural Practices:</label>
+                            <input type="number" step="any" class="form-control" id="agricultural_practices" name="agricultural_practices" placeholder="Enter value" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <i class="fas fa-chart-line"></i> Predict Flood Risk
+                        </button>
+                    </form>
+
+                    {% if flood_prediction %}
+                    <div class="prediction-results mt-4">
+                        {% if 'No Flood' in flood_prediction or '✅' in flood_prediction %}
+                            <div class="alert alert-success text-center animate-result">
+                                <h4 class="mb-0"><i class="fas fa-check-circle"></i> {{ flood_prediction }}</h4>
+                            </div>
+                        {% elif '❌' in flood_prediction or 'Error' in flood_prediction %}
+                            <div class="alert alert-warning text-center animate-result">
+                                <h4 class="mb-0"><i class="fas fa-exclamation-circle"></i> {{ flood_prediction }}</h4>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-danger text-center animate-result">
+                                <h4 class="mb-0"><i class="fas fa-exclamation-triangle"></i> {{ flood_prediction }}</h4>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
